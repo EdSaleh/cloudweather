@@ -16,7 +16,7 @@
             World Weather Cloud Service
         </p>
         <form id="addForm"method="post" action="/Home/add">
-            <label for="city">City</label> <input name="city" type="text" /> <input type="submit" value="Add" />
+            <label for="city">City</label> <input name="city" id="city" type="text" /> <input type="submit" value="Add" />
         </form>
         <div>
             <table style="width:100%">
@@ -29,7 +29,7 @@
                 <tr>
                     <td>@item.CityCountry</td>
                     <td class="glyphicon glyphicon-refresh spinning"></td>
-                    <td><form class="deleteForm glyphicon-remove glyphicon" method="post" action="/Home/remove?city=@item.CityCountry"></form></td>
+                    <td><form  method="post" class="deleteForm" action="/Home/remove?city=@item.CityCountry"><button type="submit" class="glyphicon-remove glyphicon" style="background-color:transparent; display:block; border:none" ></button></form></td>
                 </tr>
                 }
             </table>
