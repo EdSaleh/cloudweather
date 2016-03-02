@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "World Weather";
+}
+@model IEnumerable<Assign1.Models.Place>
+
+
+<div class="jumbotron">
+    <h1>World Weather</h1>
+    <p class="lead">Weather around the world</p>
+</div>
+
+<div class="row">
+    <div class="" style="width:100%">
+        <h2>World Weather</h2>
+        <p>
+            World Weather Cloud Service
+        </p>
+        <form id="addForm"method="post" action="/Home/add">
+            <label for="city">City</label> <input name="city" id="city" type="text" /> <input type="submit" value="Add" />
+        </form>
+        <div>
+            <table style="width:100%">
+                <tr>
+                    <td>City</td>
+                    <td>Weather</td>
+                    <td></td>
+                </tr>
+                @foreach(var item in Model) {
+                <tr>
+                    <td>@item.CityCountry</td>
+                    <td class="glyphicon glyphicon-refresh spinning"></td>
+                    <td><form  method="post" class="deleteForm" action="/Home/remove?city=@item.CityCountry"><button type="submit" class="glyphicon-remove glyphicon" style="background-color:transparent; display:block; border:none" ></button></form></td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+    
+</div>
