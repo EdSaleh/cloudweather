@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Assign1
+namespace CloudAssign
 {
     public class BundleConfig
     {

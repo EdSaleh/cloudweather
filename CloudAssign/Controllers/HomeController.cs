@@ -4,8 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using Facebook;
+using System.Net;
+using System.IO;
 
-namespace CloudAssign.Controllers
+namespace CloudAssign.Controllers 
 {
     public class HomeController : Controller
     {
@@ -13,6 +18,52 @@ namespace CloudAssign.Controllers
         {
             return View(new CloudAssignDBLinqDataContext().Places.ToList());
         }
+
+        public void CheckAuthorization()
+        {
+
+            string app_id = "202811020075962";
+            string app_secret = "976c2e3ba7b6cc73392afefe656808f0";
+            string scope = "public_profile";
+
+            if (Request["code"] == null)
+            {
+                Response.Redirect(string.Format(
+                    "https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}",
+                    app_id, Request.Url.AbsoluteUri, scope));
+            }
+            else
+            {
+                Dictionary<string, string> tokens = new Dictionary<string, string>();
+
+                string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&code={2}&client_secret={3}&scope={4}",
+                    app_id, Request.Url.AbsoluteUri, Request["code"].ToString(), app_secret,scope);
+                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+
+                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                {
+                    StreamReader reader = new StreamReader(response.GetResponseStream());
+
+                    string vals = reader.ReadToEnd();
+
+                    foreach (string token in vals.Split('&'))
+                    {
+                        tokens.Add(token.Substring(0, token.IndexOf("=")),
+                            token.Substring(token.IndexOf("=") + 1, token.Length - token.IndexOf("=") - 1));
+                    }
+                }
+
+
+                string access_token = tokens["access_token"];
+
+
+                var client = new FacebookClient(access_token);
+                dynamic result = client.Get("me");
+                Response.Cookies.Add(new HttpCookie("user", result.name));
+                Response.Redirect("/");
+            }
+        }
+
         public void add(string city)
         {
             var db = new CloudAssignDBLinqDataContext();
@@ -26,72 +77,6 @@ namespace CloudAssign.Controllers
             var db = new CloudAssignDBLinqDataContext();
             db.Places.DeleteOnSubmit(db.Places.FirstOrDefault(x=>x.CityCountry==city));
             db.SubmitChanges();
-        }
-
-    }
-}
-
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
- 
-using Facebook;
- 
-namespace FBO
-{
-    public partial class facebooksync : System.Web.UI.Page
-    {
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            CheckAuthorization();
-        }
-
-        private void CheckAuthorization()
-        {
-            string app_id = "374961455917802";
-            string app_secret = "9153b340ee604f7917fd57c7ab08b3fa";
-            string scope = "publish_stream,manage_pages";
-
-            if (Request["code"] == null)
-            {
-                Response.Redirect(string.Format(
-                    "https://graph.facebook.com/oauth/authorize?client_id={0}&redirect_uri={1}&scope={2}",
-                    app_id, Request.Url.AbsoluteUri, scope));
-            }
-            else
-            {
-                Dictionary<string, string> tokens = new Dictionary<string, string>();
-
-                string url = string.Format("https://graph.facebook.com/oauth/access_token?client_id={0}&redirect_uri={1}&scope={2}&code={3}&client_secret={4}",
-                    app_id, Request.Url.AbsoluteUri, scope, Request["code"].ToString(), app_secret);
-
-                HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
-
-                using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                {
-                    StreamReader reader = new StreamReader(response.GetResponseStream());
-
-                    string vals = reader.ReadToEnd();
-
-                    foreach (string token in vals.Split('&'))
-                    {
-                        //meh.aspx?token1=steve&token2=jake&...
-                        tokens.Add(token.Substring(0, token.IndexOf("=")),
-                            token.Substring(token.IndexOf("=") + 1, token.Length - token.IndexOf("=") - 1));
-                    }
-                }
-
-                string access_token = tokens["access_token"];
-
-                var client = new FacebookClient(access_token);
-
-                client.Post("/me/feed", new { message = "markhagan.me video tutorial" });
-            }
         }
     }
 }

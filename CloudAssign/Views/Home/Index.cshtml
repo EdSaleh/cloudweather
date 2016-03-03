@@ -15,6 +15,12 @@
         <p>
             World Weather Cloud Service
         </p>
+        <br />
+        <div class="h3">
+            Welcome, <span id="user"><a href="/Home/CheckAuthorization"><img src="/Images/loginfb.png" /></a></span><br />
+            You are located at <div id="location" style="display:inline-block"><span class="glyphicon-refresh glyphicon spinning"></span></div>
+        </div>
+        <br />
         <form id="addForm"method="post" action="/Home/add">
             <label for="city">City</label> <input name="city" id="city" type="text" /> <input type="submit" value="Add" />
         </form>

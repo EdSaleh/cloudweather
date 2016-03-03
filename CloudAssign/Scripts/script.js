@@ -1,6 +1,21 @@
 ﻿//on load
 var That = "";
 $(function () {
+    //Checking if the user is loged in.
+    var user = getCookie("user");
+    if (user != "") {
+        $("#user").html(user +", "+ "<a href='#' onclick='logout()'>Logout</a>")
+    }
+    
+   
+    $.get("http://ip-api.com/json", function (data) {
+        var city = (data["city"] + ", " + data["country"]);
+        var req = "https://query.yahooapis.com/v1/public/yql?q=" + 'select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="' +city + '")' + "&format=json";
+
+        $.get(req, function (innerData) {
+            $("#location").html(city + ": " + innerData['query']['results']['channel']['item']['condition']['temp'] + innerData['query']['results']['channel']['units']['temperature']);
+        });
+    });
 $("#addForm").submit(function (e) {
     var url = $(this).attr("action"); // the script where you handle the form input.
     $.ajax({
@@ -16,6 +31,7 @@ $("#addForm").submit(function (e) {
 
     e.preventDefault(); // avoid to execute the actual submit of the form.
 });
+
 $("body").click(function () {
     $(".deleteForm").submit(function (e) {
         var url = $(this).attr("action"); // the script where you handle the form input.
@@ -44,3 +60,28 @@ $("body").click(function () {
         };
     })
 });
+
+//get cookie by name
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+//Logout
+function logout(){
+    setCookie("user", "", 2);
+    $("#user").html('<a href="/Home/CheckAuthorization"><img src="/Images/loginfb.png" /></a>')
+}
+//Set cookies
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}

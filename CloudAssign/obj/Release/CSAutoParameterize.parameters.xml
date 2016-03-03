@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="CloudAssignDBConnectionString-Web.config Connection String" description="CloudAssignDBConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\CloudAssignDB.mdf;Integrated Security=True" tags="SqlConnectionString">
-    <parameterEntry kind="XmlFile" scope="C:\\Me\\University\\Cloud\ Comp\\Assign1\\Assign1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CloudAssignDBConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Me\\University\\Cloud\ Comp\\CloudAssign\\CloudAssign\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CloudAssignDBConnectionString']/@connectionString" />
   </parameter>
 </parameters>

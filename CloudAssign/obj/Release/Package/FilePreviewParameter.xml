@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
   <parameter name="IIS Web Application Name" description="" value="weathercloud1" tags="IisApp">
-    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Me\\University\\Cloud\ Comp\\Assign1\\Assign1\\obj\\Release\\Package\\PackageTmp$" />
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Me\\University\\Cloud\ Comp\\Assign1\\Assign1\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Me\\University\\Cloud\ Comp\\CloudAssign\\CloudAssign\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Me\\University\\Cloud\ Comp\\CloudAssign\\CloudAssign\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
   <parameter name="Add write permission to App_Data Folder" description="Add write permission to App_Data folder" value="weathercloud1/App_Data" tags="Hidden">
-    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Me\\University\\Cloud\ Comp\\Assign1\\Assign1\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Me\\University\\Cloud\ Comp\\CloudAssign\\CloudAssign\\obj\\Release\\Package\\PackageTmp\\App_Data$" />
   </parameter>
   <parameter name="CloudAssignDBConnectionString-Web.config Connection String" description="" value="Data Source=tcp:sqlserver-client.database.windows.net,1433;Initial Catalog=weathercloud1_db;User Id=sqlserver-client-admin@sqlserver-client;Password=1234567890Az$" tags="">
-    <parameterEntry kind="XmlFile" scope="C:\\Me\\University\\Cloud\ Comp\\Assign1\\Assign1\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CloudAssignDBConnectionString']/@connectionString" />
+    <parameterEntry kind="XmlFile" scope="C:\\Me\\University\\Cloud\ Comp\\CloudAssign\\CloudAssign\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CloudAssignDBConnectionString']/@connectionString" />
   </parameter>
 </parameters>
