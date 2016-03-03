@@ -19,6 +19,7 @@ namespace CloudAssign.Controllers
             return View(new CloudAssignDBLinqDataContext().Places.ToList());
         }
 
+        //Facebook Authorization method
         public void CheckAuthorization()
         {
 
@@ -64,6 +65,7 @@ namespace CloudAssign.Controllers
             }
         }
 
+        //add a city
         public void add(string city)
         {
             var db = new CloudAssignDBLinqDataContext();
@@ -73,6 +75,7 @@ namespace CloudAssign.Controllers
                 db.SubmitChanges();
             }
         }
+        //remove a city
         public void remove(string city) {
             var db = new CloudAssignDBLinqDataContext();
             db.Places.DeleteOnSubmit(db.Places.FirstOrDefault(x=>x.CityCountry==city));
