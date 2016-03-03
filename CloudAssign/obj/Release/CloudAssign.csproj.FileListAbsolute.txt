@@ -52,3 +52,4 @@ C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\bin\Antlr3.Runtime.pdb
 C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\bin\Newtonsoft.Json.xml
 C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\CloudAssign.dll
 C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\CloudAssign.pdb
+C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\CloudAssign.csprojResolveAssemblyReference.cache

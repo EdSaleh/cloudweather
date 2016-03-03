@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
+  <DbDacFx path="C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\AutoScripts\CloudAssignDBConnectionString_IncrementalSchemaOnly.dacpac" dacpacAction="Deploy" />
   <IisApp path="C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\Package\PackageTmp" />
   <setAcl path="C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
   <setAcl path="C:\Me\University\Cloud Comp\CloudAssign\CloudAssign\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
